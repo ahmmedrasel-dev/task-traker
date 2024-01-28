@@ -17,6 +17,7 @@ export default function Taskboard() {
   const [showAddModal, setShowAddModla] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
 
+  // Add Single Task
   function handleAddTask(newTask, isAdd) {
     if (isAdd) {
       setTasks([...tasks, newTask]);
@@ -34,9 +35,16 @@ export default function Taskboard() {
     setTaskToUpdate(null);
   }
 
+  // Edit Single Task
   function handleEditTask(task) {
     setTaskToUpdate(task);
     setShowAddModla(true);
+  }
+
+  // Delee Single Task
+  function handleDelete(id) {
+    const taskIdAfterDelete = tasks.filter((task) => task.id !== id);
+    setTasks(taskIdAfterDelete);
   }
 
   function handleCloseModal() {
@@ -60,7 +68,11 @@ export default function Taskboard() {
         <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
           <TaskAction onAddClick={() => setShowAddModla(true)} />
 
-          <TaskList tasks={tasks} handleEditTask={handleEditTask} />
+          <TaskList
+            tasks={tasks}
+            handleEditTask={handleEditTask}
+            handleDelete={handleDelete}
+          />
         </div>
       </div>
     </section>
