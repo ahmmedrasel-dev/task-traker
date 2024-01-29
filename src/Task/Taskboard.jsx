@@ -53,6 +53,13 @@ export default function Taskboard() {
     setTasks([...tasks]);
   }
 
+  function handleFevorite(id) {
+    const taskIndex = tasks.findIndex((task) => task.id === id);
+    const newTask = [...tasks];
+    newTask[taskIndex].isFavorite = !newTask[taskIndex].isFavorite;
+    setTasks(newTask);
+  }
+
   function handleCloseModal() {
     setShowAddModla(false);
     setTaskToUpdate(null);
@@ -81,6 +88,7 @@ export default function Taskboard() {
             tasks={tasks}
             handleEditTask={handleEditTask}
             handleDelete={handleDelete}
+            handleFevorite={handleFevorite}
           />
         </div>
       </div>
