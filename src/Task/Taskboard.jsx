@@ -3,6 +3,7 @@ import SearchTask from "./SearchTask";
 import TaskAction from "./TaskAction";
 import TaskList from "./TaskList";
 import AddTaskModal from "./AddTaskModal";
+import NoTaskFound from "../NoTaskFound";
 export default function Taskboard() {
   const defaultTask = {
     id: crypto.randomUUID(),
@@ -90,13 +91,16 @@ export default function Taskboard() {
             onAddClick={() => setShowAddModla(true)}
             handleAllDeleteTask={handleAllDeleteTask}
           />
-
-          <TaskList
-            tasks={tasks}
-            handleEditTask={handleEditTask}
-            handleDelete={handleDelete}
-            handleFevorite={handleFevorite}
-          />
+          {tasks.length > 0 ? (
+            <TaskList
+              tasks={tasks}
+              handleEditTask={handleEditTask}
+              handleDelete={handleDelete}
+              handleFevorite={handleFevorite}
+            />
+          ) : (
+            <NoTaskFound />
+          )}
         </div>
       </div>
     </section>
