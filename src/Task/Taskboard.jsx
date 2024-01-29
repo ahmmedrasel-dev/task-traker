@@ -64,6 +64,13 @@ export default function Taskboard() {
     setShowAddModla(false);
     setTaskToUpdate(null);
   }
+
+  function onSearch(keyword) {
+    const searchResult = tasks.filter((task) =>
+      task.title.toLowerCase().includes(keyword.toLowerCase())
+    );
+    setTasks([...searchResult]);
+  }
   return (
     <section className="mb-20" id="tasks">
       {showAddModal && (
@@ -75,7 +82,7 @@ export default function Taskboard() {
       )}
       <div className="container">
         <div className="p-2 flex justify-end">
-          <SearchTask />
+          <SearchTask onSearch={onSearch} />
         </div>
 
         <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
